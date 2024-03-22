@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,3 +30,8 @@ Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.u
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 //checkout routes
+
+//costumer routes
+Route::post('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
+Route::get('/customer/profile/{id}', [CustomerController::class, 'profile'])->middleware('auth')->name('customer.profile');
+Route::post('/customer/profile/{id}', [CustomerController::class, 'update'])->middleware('auth')->name('customer.update');
