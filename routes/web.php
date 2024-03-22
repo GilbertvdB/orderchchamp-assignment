@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\CustomerController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,10 @@ Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.u
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
 //checkout routes
+Route::get('/checkout/details', [CheckoutController::class, 'step1'])->name('checkout.step1');
+Route::post('/checkout/confirm', [CheckoutController::class, 'step3'])->name('checkout.step3');
+Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+Route::get('/checkout/failed', [CheckoutController::class, 'failed'])->name('checkout.failed');
 
 //costumer routes
 Route::post('/customer/register', [CustomerController::class, 'register'])->name('customer.register');

@@ -22,13 +22,13 @@ class CustomerController extends Controller
         $newUser = User::create([
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
-            'password' => Hash::make(Str::random(8)),
+            'password' => Hash::make(Str::random(8)), //todo send mail with password/resetPassword
         ]);
 
         $newCustomer = new Customer;
         $newCustomer->name = $newUser->name;
-        $newCustomer->adress = $request->input('adress');
-        $newCustomer->adress_nr = $request->input('adress_nr');
+        $newCustomer->address = $request->input('address');
+        $newCustomer->address_nr = $request->input('address_nr');
         $newCustomer->postalcode = $request->input('postalcode');
         $newCustomer->city = $request->input('city');
         $newCustomer->country_id = 1; //demo purpose
@@ -37,7 +37,7 @@ class CustomerController extends Controller
         
         Auth::login($newUser);
         
-        return redirect()->route('checkout.details')->with('success', 'Registration successful!');
+        return redirect()->route('checkout.step1')->with('success', 'Registration successful!');
     }
 
     /**
@@ -45,7 +45,9 @@ class CustomerController extends Controller
      */
     public function profile(string $id)
     {
-        return view('customer.profle');
+        $user = User::findOrFail($id);
+
+        return view('customer.profile', compact('user'));
     }
 
 
@@ -55,7 +57,7 @@ class CustomerController extends Controller
     public function update(Request $request, string $id)
     {
         $customer = Customer::findOrFail($id);
-
+        
         $customer->name = $request->input('name');
         $customer->address = $request->input('address');
         $customer->address_nr = $request->input('address_nr');
