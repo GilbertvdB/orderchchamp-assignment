@@ -6,30 +6,31 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Customer extends Model
+class Order extends Model
 {
     use HasFactory;
 
-    /**
+     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'name',
-        'address',
-        'address_nr',
-        'postalcode',
-        'city',
-        'country_id',
-        'user_id',
+        'order_number',
+        'subtotal', 
+        'shipping', 
+        'coupon',
+        'tax',
+        'total',
+        'customer_id',
     ];
 
     /**
-     * Get the user associated with the customer.
+     * Get the customer associated with the order.
      */
-    public function user(): BelongsTo
+    public function customer(): BelongsTo
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Customer::class, 'user_id', 'id');
     }
+    
 }

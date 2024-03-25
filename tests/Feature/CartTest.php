@@ -8,9 +8,6 @@ use Tests\TestCase;
 
 class CartTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     */
     public function test_cart_index_route_returns_a_succesfull_response(): void
     {
         $response = $this->get('/cart');

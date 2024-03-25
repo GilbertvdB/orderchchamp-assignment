@@ -7,7 +7,10 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
 class CartController extends Controller
-{
+{   
+    /**
+     * Display the contents of the cart.
+     */
     public function index(): View
     {
         $cart = session()->get('cart', []);
@@ -15,6 +18,9 @@ class CartController extends Controller
         return view('cart.index', compact('cart'));
     }
 
+    /**
+     * Add items to cart in session storage.
+     */
     public function addToCart(Request $request): RedirectResponse
     {
         $productId = $request->input('product_id');
@@ -33,11 +39,17 @@ class CartController extends Controller
         return redirect()->route('cart.index');
     }
 
+    /**
+     * Update items in cart in session storage.
+     */
     public function updateCart(Request $request)
     {
         // code to update items in cart
     }
 
+    /**
+     * Remove items from cart in session storage.
+     */
     public function removeFromCart(Request $request)
     {
         //code to remove items from cart

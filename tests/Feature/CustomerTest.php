@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Http\Requests\StoreCustomerRequest;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Customer;
@@ -12,9 +13,6 @@ class CustomerTest extends TestCase
 {   
     use RefreshDatabase;
 
-    /**
-     * A basic feature test example.
-     */
     public function test_user_can_register_at_checkout(): void
     {
         $formData = [
@@ -44,22 +42,4 @@ class CustomerTest extends TestCase
 
         $response->assertOk();
     }
-
-    // public function test_user_can_update_customer_profile()
-    // {
-    //     $customer = Customer::factory()->create();
-    //     $newData = [
-    //         'name' => 'Update Test',
-    //         'address' => '456 Update Street',
-    //         'address_nr' => '303',
-    //         'postalcode' => '1234XX',
-    //         'city' => 'Update City',
-    //         'user_id' => 1, //$customer->id,
-    //     ];
-
-    //     $response = $this->post(route('customer.update', ['id' => $customer->id]), $newData);
-
-    //     // $response->assertRedirect(route('customer.profile', ['id' => $customer->id]));
-    //     $this->assertDatabaseHas('customers', $newData);
-    // }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
@@ -24,19 +25,19 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//cart routes
+// cart routes
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 Route::post('/cart/update', [CartController::class, 'updateCart'])->name('cart.update');
 Route::post('/cart/remove', [CartController::class, 'removeFromCart'])->name('cart.remove');
 
-//checkout routes
+// checkout routes
 Route::get('/checkout/details', [CheckoutController::class, 'step1'])->name('checkout.step1');
-Route::post('/checkout/confirm', [CheckoutController::class, 'step3'])->name('checkout.step3');
+Route::post('/checkout/confirm', [CheckoutController::class, 'confirmOrder'])->name('checkout.confirm');
 Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
 Route::get('/checkout/failed', [CheckoutController::class, 'failed'])->name('checkout.failed');
 
-//costumer routes
+// account/costumer routes
 Route::post('/customer/register', [CustomerController::class, 'register'])->name('customer.register');
 Route::get('/customer/profile/{id}', [CustomerController::class, 'profile'])->middleware('auth')->name('customer.profile');
 Route::post('/customer/profile/{id}', [CustomerController::class, 'update'])->middleware('auth')->name('customer.update');

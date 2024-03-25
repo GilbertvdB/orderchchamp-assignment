@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCustomerRequest;
 use App\Models\User;
 use App\Models\Customer;
+use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -13,12 +15,10 @@ use Illuminate\Support\Facades\Hash;
 class CustomerController extends Controller
 {
     /**
-     * Display the specified resource.
+     * Register the user and continue step 1 checkout process.
      */
     public function register(Request $request): RedirectResponse
     {   
-
-        //todo check if user or customer data is already created or not
         $newUser = User::create([
             'name'     => $request->input('name'),
             'email'    => $request->input('email'),
@@ -41,9 +41,9 @@ class CustomerController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the users profile.
      */
-    public function profile(string $id)
+    public function profile(string $id): View
     {
         $user = User::findOrFail($id);
 
@@ -52,19 +52,11 @@ class CustomerController extends Controller
 
 
     /**
-     * Update the specified resource in storage.
+     * Update the users profile in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $id): RedirectResponse
     {
-        $customer = Customer::findOrFail($id);
-        
-        $customer->name = $request->input('name');
-        $customer->address = $request->input('address');
-        $customer->address_nr = $request->input('address_nr');
-        $customer->postalcode = $request->input('postalcode');
-        $customer->city = $request->input('city');
-        // $customer->country_id = $request->input('country_id');
-        $customer->save();
+        //
 
         return redirect()->route('customer.profile')->with('success', 'Profile updated!');
     }

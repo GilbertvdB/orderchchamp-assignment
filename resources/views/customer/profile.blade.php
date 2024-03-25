@@ -1,6 +1,4 @@
-<!-- resources/views/customer/profile.blade.php -->
-
-@extends('layouts.app') <!-- Assuming you have a layout file -->
+@extends('layouts.app')
 
 @section('content')
     <div class="container">
@@ -19,7 +17,7 @@
                     <li><strong>Address Number:</strong> {{ $user->customer->address_nr }}</li>
                     <li><strong>Postal Code:</strong> {{ $user->customer->postalcode }}</li>
                     <li><strong>City:</strong> {{ $user->customer->city }}</li>
-                    <li><strong>Country:</strong> {{ $user->customer->country_id }}</li> <!-- Assuming you have a relationship set up -->
+                    <li><strong>Country:</strong> {{ $user->customer->country_id }}</li>
                 </ul>
             </div>
             <div class="col-md-6">
